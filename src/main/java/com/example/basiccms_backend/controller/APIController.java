@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/")
 public class APIController {
 
-    ContentService cs;
+    private final ContentService cs;
 
     public APIController(ContentService cs) {
         this.cs = cs;
@@ -28,6 +28,15 @@ public class APIController {
     @PutMapping("/updatecontent")
     public ResponseEntity<?> putContent(Content content) {
         return ResponseEntity.ok(cs.addContent(content));
+    }
+
+    @GetMapping("/content/{id}")
+    public ResponseEntity<?> findContent(@PathVariable Long id) {
+        if (cs.getContentById(id).isPresent()){
+            return ResponseEntity.ok(cs.getContentById(id).get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }

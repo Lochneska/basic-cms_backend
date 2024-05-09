@@ -10,7 +10,7 @@ import java.util.Optional;
 @Service
 public class ContentService {
 
-    private ContentRepo cr;
+    private final ContentRepo cr;
 
     public ContentService(ContentRepo cr) {
         this.cr = cr;
