@@ -21,18 +21,27 @@ public class APIController {
     }
 
     @PostMapping("/addcontent")
-    public ResponseEntity<?> postContent(Content content) {
-        return ResponseEntity.ok(cs.addContent(content));
+    public ResponseEntity<?> postContent(@RequestBody Content content) {
+        if (content.getId() == null) {
+            return ResponseEntity.ok(cs.addContent(content));
+        } else {
+            return ResponseEntity.badRequest().body("Cannot update content via /api/addcontent endpoint.");
+        }
     }
 
-    @PutMapping("/updatecontent")
-    public ResponseEntity<?> putContent(Content content) {
-        return ResponseEntity.ok(cs.addContent(content));
+    @PutMapping("/updatecontent/{id}")
+    public ResponseEntity<?> putContent(@RequestBody Content content, @PathVariable Long id) {
+        if (cs.getContentById(id).isPresent()) {
+            content.setId(id);
+            return ResponseEntity.ok(cs.addContent(content));
+        } else {
+            return ResponseEntity.badRequest().body("Content with id " + id + " not found.");
+        }
     }
 
     @GetMapping("/content/{id}")
     public ResponseEntity<?> findContent(@PathVariable Long id) {
-        if (cs.getContentById(id).isPresent()){
+        if (cs.getContentById(id).isPresent()) {
             return ResponseEntity.ok(cs.getContentById(id).get());
         } else {
             return ResponseEntity.notFound().build();
