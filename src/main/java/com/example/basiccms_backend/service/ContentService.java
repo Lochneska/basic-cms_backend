@@ -28,4 +28,8 @@ public class ContentService {
         return cr.save(content);
     }
 
+    public void deleteContentById(Long id) {
+        cr.deleteById(id);
+    }
+
 }
