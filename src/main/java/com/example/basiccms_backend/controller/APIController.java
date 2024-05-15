@@ -63,10 +63,7 @@ public class APIController {
     @PutMapping("/updatecontent/{id}")
     public ResponseEntity<?> putContent(@RequestBody ContentDTO dto, @PathVariable Long id) {
         if (cs.getContentById(id).isPresent()) {
-            Content content = new Content(dto);
-            content.setId(id);
-
-            return ResponseEntity.ok(cs.addContent(content));
+            return ResponseEntity.ok(cs.updateContent(id, dto));
         } else {
             return ResponseEntity.notFound().build();
         }
