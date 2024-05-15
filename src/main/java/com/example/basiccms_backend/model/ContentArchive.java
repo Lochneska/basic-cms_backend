@@ -1,22 +1,17 @@
 package com.example.basiccms_backend.model;
 
 import com.example.basiccms_backend.dto.ContentDTO;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class Content {
+public class ContentArchive {
 
     @Id
     @GeneratedValue
@@ -26,11 +21,12 @@ public class Content {
     private String thumbnail;
     private String description;
 
-    @OneToMany(mappedBy = "content")
-    private Set<ContentArchive> archive = new HashSet<>();
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="content_id", referencedColumnName = "id")
+    private Content content;
 
-
-    public Content(ContentDTO dto) {
+    public ContentArchive(ContentDTO dto) {
         this.title = dto.title();
         this.thumbnail = dto.thumbnail();
         this.description = dto.description();
