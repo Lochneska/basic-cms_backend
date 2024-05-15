@@ -105,6 +105,14 @@ public class APIController {
         }
     }
 
+    @Operation(
+            summary = "Fetches archived content with provided id."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved."),
+            @ApiResponse(responseCode = "404", description = "No content found with given id.")
+    })
+
     @GetMapping("/archive/{id}")
     public ResponseEntity<?> getArchivedContent(@PathVariable Long id) {
         if (cs.getContentById(id).isPresent()) {
