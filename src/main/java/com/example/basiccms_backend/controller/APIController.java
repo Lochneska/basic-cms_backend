@@ -105,4 +105,12 @@ public class APIController {
         }
     }
 
+    @GetMapping("/archive/{id}")
+    public ResponseEntity<?> getArchivedContent(@PathVariable Long id) {
+        if (cs.getContentById(id).isPresent()) {
+             return ResponseEntity.ok(cs.getContentById(id).get().getArchive());
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 }
