@@ -52,6 +52,7 @@ public class ContentService {
     }
 
     public void deleteContentById(Long id) {
+        car.deleteContentArchivesByContentId(id);
         cr.deleteById(id);
     }
 
