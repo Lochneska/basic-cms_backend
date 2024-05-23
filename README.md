@@ -5,10 +5,17 @@ Hi! This is the backend part of my pet project, built using Java, Spring Framewo
 
 - **Java 17**
 - **Spring Boot 3.2.5**
+- **Maven**
 - **Lombok**
 - **Spring Data JPA**
-- **Springdoc OpenAPI 2.5.0**: Integration with Spring Boot to generate OpenAPI 3 documentation for RESTful APIs, with Swagger UI.
-- **Maven**
+- **Springdoc OpenAPI 2.5.0**
+
+## Functionality
+
+- A RESTful API with CRUD operations
+- Documentation done for said API with Swagger UI
+- Connection to a MySQL database
+
 
 
 ## API Documentation in Swagger UI:
